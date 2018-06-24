@@ -27,11 +27,13 @@ for (var i = 3; i < userSearch.length; i++) {
   if (i > 3 && i < userSearch.length) {
     songName = songName + "+" + userSearch[i];
   }
-  else {
+  else if (i = 3) {
     songName += userSearch[i];
   }
+  else if (userSearch[i] = undefined) {
+    songName = "The Sign";
+  }
 }
-
 
 // this will run a function based off the user argument that was used
 switch (userCommand) {
@@ -52,14 +54,14 @@ switch (userCommand) {
     break;
 }
 
-function spotifySong(){
-  spotify.search({ type: 'track', query: songName, limit: 1 }, function(err, data) {
+function spotifySong() {
+  spotify.search({ type: 'track', query: songName || "The Sign Ace of Base" }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
    
   // stores the first track object returned
-  var trackInfo = data.tracks.items[0]
+  var trackInfo = data.tracks.items[0];
   
   // displays the artist of the searched track
   console.log("Artist(s): " + (JSON.stringify(trackInfo.album.artists[0].name)));
