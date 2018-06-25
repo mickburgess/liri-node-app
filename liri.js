@@ -19,7 +19,7 @@ var client = new Twitter(keys.twitter);
 var userCommand = process.argv[2];
 // stores all of the arguments in an array
 var nodeArgs = process.argv;
-// create an empty variable for holding the song name
+// create an empty variable for holding the user's search
 var userInput = "";
 
 // loop through all the words in the user search and add a "+" between multiple arguments
@@ -88,8 +88,29 @@ function spotifySong() {
 };
 
 
-var movieName = "";
-
 function movie() {
+  // Then run a request to the OMDB API with the movie specified
+  var queryUrl = "http://www.omdbapi.com/?t=" + (userInput || "Mr. Nobody") + "&y=&plot=short&apikey=trilogy";
 
-}
+  request(queryUrl, function (error, response, body) {
+
+    if (!error && response.statusCode === 200) {
+      // gets movie title from body
+      console.log("Movie Title: " + JSON.parse(body).Title);
+      // gets release year from body
+      console.log("Release Year: " + JSON.parse(body).Year);
+      // gets IMDB rating of movie from body
+      console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+      // gets Rotten Tomatoes rating of movie from body
+      console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+      // gets country the movie was produced from body
+      console.log("Country Where Produced: " + JSON.parse(body).Country);
+      // gets language of the movie from body
+      console.log("Language: " + JSON.parse(body).Language);
+      // gets plot of the movie from body
+      console.log("Plot: " + JSON.parse(body).Plot);
+      // gets actors in the movie from body
+      console.log("Actors: " + JSON.parse(body).Actors);
+    }
+  })
+};
