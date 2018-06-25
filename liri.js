@@ -54,25 +54,38 @@ switch (userCommand) {
     break;
 }
 
+// prints last 20 tweets and the time when they were created to the console
+function tweets() {
+  var params = { screen_name: 'nodejs', count: 20 };
+  client.get('statuses/user_timeline', params, function (error, tweets, response) {
+    if (!error) {
+      for (var i = 0; i < tweets.length; i++) {
+        console.log(JSON.stringify(tweets[i].created_at))
+        console.log(JSON.stringify(tweets[i].text) + "\n--------------------------\n");
+      }
+    };
+  });
+};
+
 function spotifySong() {
-  spotify.search({ type: 'track', query: songName || "The Sign Ace of Base" }, function(err, data) {
+  spotify.search({ type: 'track', query: songName || "The Sign Ace of Base" }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-   
-  // stores the first track object returned
-  var trackInfo = data.tracks.items[0];
-  
-  // displays the artist of the searched track
-  console.log("Artist(s): " + (JSON.stringify(trackInfo.album.artists[0].name)));
-  
-  // displays the name of the searched track
-  console.log("Song Name: " + (JSON.stringify(trackInfo.name)));
-  
-  // displays the preview url of the searched track
-  console.log("Preview Song: " + (JSON.stringify(trackInfo.preview_url)));
-  
-  // displays the album of the searched track
-  console.log("Album: " + (JSON.stringify(trackInfo.album.name)));
+
+    // stores the first track object returned
+    var trackInfo = data.tracks.items[0];
+
+    // displays the artist of the searched track
+    console.log("Artist(s): " + (JSON.stringify(trackInfo.album.artists[0].name)));
+
+    // displays the name of the searched track
+    console.log("Song Name: " + (JSON.stringify(trackInfo.name)));
+
+    // displays the preview url of the searched track
+    console.log("Preview Song: " + (JSON.stringify(trackInfo.preview_url)));
+
+    // displays the album of the searched track
+    console.log("Album: " + (JSON.stringify(trackInfo.album.name)));
   });
 };
