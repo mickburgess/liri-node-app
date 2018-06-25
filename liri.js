@@ -17,18 +17,18 @@ var client = new Twitter(keys.twitter);
 
 // grabs and stores what the user command is
 var userCommand = process.argv[2];
-// grabs and stores what the user search value is
-var userSearch = process.argv;
+// stores all of the arguments in an array
+var nodeArgs = process.argv;
 // create an empty variable for holding the song name
-var songName = "";
+var userInput = "";
 
 // loop through all the words in the user search and add a "+" between multiple arguments
-for (var i = 3; i < userSearch.length; i++) {
-  if (i > 3 && i < userSearch.length) {
-    songName = songName + "+" + userSearch[i];
+for (var i = 3; i < nodeArgs.length; i++) {
+  if (i > 3 && i < nodeArgs.length) {
+    userInput = userInput + "+" + nodeArgs[i];
   }
   else if (i = 3) {
-    songName += userSearch[i];
+    userInput += nodeArgs[i];
   }
 }
 
@@ -65,7 +65,7 @@ function tweets() {
 };
 
 function spotifySong() {
-  spotify.search({ type: 'track', query: songName || "The Sign Ace of Base" }, function (err, data) {
+  spotify.search({ type: 'track', query: userInput || "The Sign Ace of Base" }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -86,6 +86,9 @@ function spotifySong() {
     console.log("Album: " + (JSON.stringify(trackInfo.album.name)));
   });
 };
+
+
+var movieName = "";
 
 function movie() {
 
