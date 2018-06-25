@@ -30,9 +30,6 @@ for (var i = 3; i < userSearch.length; i++) {
   else if (i = 3) {
     songName += userSearch[i];
   }
-  else if (userSearch[i] = undefined) {
-    songName = "The Sign";
-  }
 }
 
 // this will run a function based off the user argument that was used
@@ -89,3 +86,7 @@ function spotifySong() {
     console.log("Album: " + (JSON.stringify(trackInfo.album.name)));
   });
 };
+
+function movie() {
+
+}
