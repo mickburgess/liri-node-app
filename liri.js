@@ -54,6 +54,7 @@ switch (userCommand) {
     break;
 }
 
+// function that searches Spotify for the track the user inputs
 function spotifySong() {
   spotify.search({ type: 'track', query: songName || "The Sign Ace of Base" }, function(err, data) {
     if (err) {
