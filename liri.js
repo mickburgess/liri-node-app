@@ -61,18 +61,20 @@ function spotifySong() {
     }
    
   // stores the first track object returned
-  var trackInfo = data.tracks.items[0];
+  // var trackInfo = data.tracks.items[i];
+  for(var i = 0; i < data.tracks.items.length; i++) {
   
   // displays the artist of the searched track
-  console.log("Artist(s): " + (JSON.stringify(trackInfo.album.artists[0].name)));
+  console.log("Artist(s): " + (JSON.stringify(data.tracks.items[i].album.artists[0].name)));
   
   // displays the name of the searched track
-  console.log("Song Name: " + (JSON.stringify(trackInfo.name)));
+  console.log("Song Name: " + (JSON.stringify(data.tracks.items[i].name)));
   
   // displays the preview url of the searched track
-  console.log("Preview Song: " + (JSON.stringify(trackInfo.preview_url)));
+  console.log("Preview Song: " + (JSON.stringify(data.tracks.items[i].preview_url)));
   
   // displays the album of the searched track
-  console.log("Album: " + (JSON.stringify(trackInfo.album.name)));
+  console.log("Album: " + (JSON.stringify(data.tracks.items[i].album.name)) + "\n--------------------------\n");
+  }
   });
 };
