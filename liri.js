@@ -67,25 +67,28 @@ function tweets() {
 };
 
 function spotifySong() {
+  // pulls back up to 20 tracks; didn't limit to one in order to improve results
   spotify.search({ type: 'track', query: userInput || "The Sign Ace of Base" }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-
-    // stores the first track object returned
-    var trackInfo = data.tracks.items[0];
-
-    // displays the artist of the searched track
-    console.log("Artist(s): " + (JSON.stringify(trackInfo.album.artists[0].name)));
-
-    // displays the name of the searched track
-    console.log("Song Name: " + (JSON.stringify(trackInfo.name)));
-
-    // displays the preview url of the searched track
-    console.log("Preview Song: " + (JSON.stringify(trackInfo.preview_url)));
-
-    // displays the album of the searched track
-    console.log("Album: " + (JSON.stringify(trackInfo.album.name)));
+   
+  // stores the first track object returned
+  // var trackInfo = data.tracks.items[i];
+  for(var i = 0; i < data.tracks.items.length; i++) {
+  
+  // displays the artist of the searched track
+  console.log("Artist(s): " + (JSON.stringify(data.tracks.items[i].album.artists[0].name)));
+  
+  // displays the name of the searched track
+  console.log("Song Name: " + (JSON.stringify(data.tracks.items[i].name)));
+  
+  // displays the preview url of the searched track
+  console.log("Preview Song: " + (JSON.stringify(data.tracks.items[i].preview_url)));
+  
+  // displays the album of the searched track
+  console.log("Album: " + (JSON.stringify(data.tracks.items[i].album.name)) + "\n--------------------------\n");
+  }
   });
 };
 
@@ -118,15 +121,20 @@ function movie() {
 };
 
 function random() {
+  // reads from the random.txt file and stores the value in data array
   fs.readFile("./random.txt", "utf8", function(error, data) {
 
     if (error) {
       return console.log(error);
     }
+    // splits the array of values on the comma and stores in a variable
     var output = data.split(",");
 
+    // stores first part as the user command
     userCommand = output[0];
+    // stores second part as the user's value input
     userInput = output[1];
+    // calls a function based off what user command was in the random.txt file
     switch (userCommand) {
       case "my-tweets":
         tweets();
