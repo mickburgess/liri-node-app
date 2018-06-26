@@ -3,9 +3,11 @@ require("dotenv").config();
 // imports twitter npm package functionality
 var Twitter = require("twitter");
 // imports node-spotity-api npm package functionality
-var Spotify = require('node-spotify-api');
+var Spotify = require("node-spotify-api");
 // imports request npm package functionality
-var request = require('request');
+var request = require("request");
+// imports file system for reading files
+var fs = require("fs");
 
 // imports twitter and spotify environment variables from keys.js file
 var keys = require("./keys.js");
@@ -57,8 +59,8 @@ function tweets() {
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
     if (!error) {
       for (var i = 0; i < tweets.length; i++) {
-        console.log(JSON.stringify(tweets[i].created_at))
-        console.log(JSON.stringify(tweets[i].text) + "\n--------------------------\n");
+        console.log("Date Created: " + JSON.stringify(tweets[i].created_at))
+        console.log("Tweet: " + JSON.stringify(tweets[i].text) + "\n--------------------------\n");
       }
     };
   });
@@ -114,3 +116,29 @@ function movie() {
     }
   })
 };
+
+function random() {
+  fs.readFile("./random.txt", "utf8", function(error, data) {
+
+    if (error) {
+      return console.log(error);
+    }
+    var output = data.split(",");
+
+    userCommand = output[0];
+    userInput = output[1];
+    switch (userCommand) {
+      case "my-tweets":
+        tweets();
+        break;
+    
+      case "spotify-this-song":
+        spotifySong();
+        break;
+    
+      case "movie-this":
+        movie();
+        break;
+    }
+  })
+}
