@@ -67,6 +67,7 @@ function tweets() {
 };
 
 function spotifySong() {
+  // pulls back up to 20 tracks; didn't limit to one in order to improve results
   spotify.search({ type: 'track', query: userInput || "The Sign Ace of Base" }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
