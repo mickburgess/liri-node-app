@@ -66,6 +66,7 @@ function tweets() {
   });
 };
 
+// Searches spotify for the song the user selects or the default song if none selected. Chose to stay with the default of returning up to 20 results as returning 1 was pulling back some songs that weren't the best fit.
 function spotifySong() {
   spotify.search({ type: 'track', query: userInput || "The Sign Ace of Base" }, function (err, data) {
     if (err) {
