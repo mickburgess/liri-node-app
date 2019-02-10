@@ -19,6 +19,8 @@
   "homepage": "https://github.com/mickburgess/liri-node-app#readme",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "extend": "^3.0.2",
+    "lodash": "^4.17.11",
     "node-spotify-api": "^1.0.7",
     "request": "^2.87.0",
     "twitter": "^1.7.1"
